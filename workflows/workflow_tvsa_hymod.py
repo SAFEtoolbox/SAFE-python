@@ -26,7 +26,7 @@ by analyzing temporal dynamics of model performance and parameter
 sensitivity. Water Resources Research 47 (7).
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -48,8 +48,8 @@ from SAFEpython import HyMod
 
 #%% Step 2: (Setup the Hymod model and define input variability space)
 
-# Specify the directory where the data are stored
-mydir = r'Y:\Home\sarrazin\SAFE\SAFEpython_v0.0.0\data'
+# Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
 # Load data:
 data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
 T = 2*365
@@ -83,8 +83,8 @@ warmup = 30 # Model warmup period (days)
 # (sensitivity indices will not be computed for the warmup period)
 
 # Choose GSA method
-GSA_met = 'FAST'
-# GSA_met = 'EET'
+#GSA_met = 'FAST'
+GSA_met = 'EET'
 #GSA_met = 'VBSA'
 
 #%% Step 4: (Define choices for sampling)

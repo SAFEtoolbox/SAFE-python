@@ -16,7 +16,7 @@ resampling approach used in Variance-Based SA
 [see help of 'VBSA.vbsa_indices.m'].
 
 This script prepared by  Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -37,8 +37,8 @@ from SAFEpython import HyMod
 
 #%% Step 2: (setup the Hymod model)
 
-# Specify the directory where the data are stored
-mydir = r'Y:\Home\sarrazin\SAFE\SAFEpython_v0.0.0\data'
+# Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
 # Load data:
 data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
 rain = data[0:365, 0] # 1-year simulation
@@ -132,10 +132,10 @@ xM = max(NNfast[-1], NNvbsa[-1]*(M+2))
 plt.figure()
 plt.subplot(211)
 pf.plot_convergence(Si_fast_conv, NNfast, X_Label='no of model evaluations',
-                    Y_Label='1st-order sensitivity', labelinput=X_Labels)
+                    Y_Label='1st-order sensitivity (FAST)', labelinput=X_Labels)
 plt.xlim(xm, xM)
 plt.subplot(212)
 pf.plot_convergence(Si_vbsa_conv, NNvbsa*(M+2), X_Label='no of model evaluations',
-                    Y_Label='1st-order sensitivity', labelinput=X_Labels)
+                    Y_Label='1st-order sensitivity (VBSA)', labelinput=X_Labels)
 plt.xlim(xm, xM)
 plt.show()

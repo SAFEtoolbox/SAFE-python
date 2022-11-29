@@ -9,9 +9,9 @@
     For any comment and feedback, or to discuss a Licence agreement for
     commercial use, please contact: francesca.pianosi@bristol.ac.uk
     For details on how to cite SAFE in your publication, please see:
-    https://www.safetoolbox.info
+    https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.0.0
+    Package version: SAFEpython_v0.1.0
 
     References:
 
@@ -58,16 +58,16 @@ def sobol_g_function(x, a):
     For details on how to cite SAFE in your publication, please see:
     https://www.safetoolbox.info"""
 
-    if len(a) != len(x):
-        raise ValueError('x and a must have the same number of elements')
-
-    g = (abs(4*x-2)+a) / (1+a)
+    #if len(a) != len(x):
+    #    raise ValueError('x and a must have the same number of elements')
+    #g = (abs(4*x-2)+a) / (1+a)
+    g = (np.absolute(4*x-2)+a) / (1+a)
     y = np.array(np.prod(g))
 
     # By model definition:
     # Vi = VAR(E(Y|Xi)) = 1 / ( 3(1+ai)**2 )
-    # VARy = VAR(Y) = - 1 + np.prod( 1 + Vi )
-    Vi = np.array(1/(3*(1+a)**2))
+    # VARy = V = - 1 + np.prod( 1 + Vi )
+    Vi = 1/(3*(1+a)**2)
     V = np.array(-1 + np.prod(1+Vi))
     Si_ex = Vi/V
 

@@ -9,9 +9,14 @@
     For any comment and feedback, or to discuss a Licence agreement for
     commercial use, please contact: francesca.pianosi@bristol.ac.uk
     For details on how to cite SAFE in your publication, please see:
-    https://www.safetoolbox.info
+    https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.0.0
+    Package version: SAFEpython_v0.1.0
+    
+    Note: to run the code with Python 2, comment L289 and uncomment L290. This
+    will make the code compatible with Python 2, but not with numba. To avoid
+    error/warnings, also comment "@jit" L33. The execution time will be longer 
+    than with Python 3 because the code cannot be compiled by numba.
 
     References:
 
@@ -279,13 +284,14 @@ def hbv_sim(param, P, ept, Case, ini):
     #c = mytrimf(np.arange(1, MAXBAS+1, 1), [0, (MAXBAS+1)/2, MAXBAS+1])
     # make list [0, (MAXBAS+1)/2, MAXBAS+1] must be homogeneous (so that the
     # code works for Python 2):
-    c = mytrimf(np.arange(1, MAXBAS+1, 1), [0.0, (MAXBAS+1)/2, float(MAXBAS+1)])
+    c = mytrimf(np.arange(1, MAXBAS+1, 1), np.array([0.0, (MAXBAS+1)/2, float(MAXBAS+1)]))
     c = c/np.sum(c) # vector of normalized coefficients - (1,MAXBAS)
     Q_sim = np.zeros((T, ))
 
     for t in range(MAXBAS, T+1):
-        #Q_sim[t-1] = c @ Q[t-MAXBAS:t] # does not work for python 2
-        Q_sim[t-1] = np.matmul(c, Q[t-MAXBAS:t])
+        Q_sim[t-1] = c @ Q[t-MAXBAS:t] 
+        #Q_sim[t-1] = np.matmul(c, Q[t-MAXBAS:t]) # use this for python 2 and 
+        # numba<=0.44.0 (np.matmul is not supported by numba>=0.44.0)
 
     STATES = np.column_stack((SM, UZ, LZ))
     FLUXES = np.column_stack((EA, R, RL, Q0, Q1))
@@ -462,7 +468,7 @@ def hbv_snow_objfun(x, prec, temp, ept, flow, warmup, Case):
     f = np.nan * np.ones((6, ))
 
     # Run the model
-    ini = [0, 0, 0] # initial states
+    ini = np.array([0, 0, 0]) # initial states
     P, STATES[:, 0:2], FLUXES[:, 0:2] = snow_routine(x[0:4], temp, prec)
     Q_sim, STATES[:, 2:5], FLUXES[:, 2:7] = hbv_sim(x[4:13], P, ept, Case, ini)
 
@@ -488,5 +494,5 @@ def hbv_snow_objfun(x, prec, temp, ept, flow, warmup, Case):
     f[4] = np.abs((Qs_sort[N_33]-Qs_sort[N_67]) / (Qo_sort[N_33]-Qo_sort[N_67])-1)*100
     # SFDCE (Slope of Flow Duration Curve)
     f[5] = RMSE(Qs, Qo) # RMSE # RMSE
-
+    
     return f, Q_sim, STATES, FLUXES

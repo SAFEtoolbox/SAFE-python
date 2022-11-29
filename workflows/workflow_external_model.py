@@ -15,7 +15,7 @@ each input sample and save the corresponding output into a text file.
 to compute sensitivity indices.
 
 This script prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)

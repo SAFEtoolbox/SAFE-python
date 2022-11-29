@@ -9,9 +9,9 @@
     For any comment and feedback, or to discuss a Licence agreement for
     commercial use, please contact: francesca.pianosi@bristol.ac.uk
     For details on how to cite SAFE in your publication, please see:
-    https://www.safetoolbox.info
+    https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.0.0
+    Package version: SAFEpython_v0.1.0
 """
 from __future__ import division, absolute_import, print_function
 
@@ -69,16 +69,17 @@ def empiricalcdf(x, xi):
     ###########################################################################
     # Check inputs
     ###########################################################################
-    if not isinstance(x, np.ndarray):
-        raise ValueError('"x" must be a numpy.array.')
-    if x.dtype.kind != 'f' and x.dtype.kind != 'i' and x.dtype.kind != 'u':
-        raise RuntimeError('"x" must contain floats or integers.')
-
-    if not isinstance(xi, np.ndarray):
-        raise ValueError('"xi" must be a numpy.array.')
-    if xi.dtype.kind != 'f' and xi.dtype.kind != 'i' and xi.dtype.kind != 'u':
-        raise ValueError('"xi" must contain floats or integers.')
-
+#    Lines below were comments because they are not supported by numba:
+#    if not isinstance(x, np.ndarray):
+#        raise ValueError('"x" must be a numpy.array.')
+#    if x.dtype.kind != 'f' and x.dtype.kind != 'i' and x.dtype.kind != 'u':
+#        raise RuntimeError('"x" must contain floats or integers.')
+#
+#    if not isinstance(xi, np.ndarray):
+#        raise ValueError('"xi" must be a numpy.array.')
+#    if xi.dtype.kind != 'f' and xi.dtype.kind != 'i' and xi.dtype.kind != 'u':
+#        raise ValueError('"xi" must contain floats or integers.')
+#
     x = x.flatten() # shape (N, )
     xi = xi.flatten() # shape (Ni, )
 
@@ -93,15 +94,12 @@ def empiricalcdf(x, xi):
     # and set F(x) to the upper value (recall that F(x) is the percentage of
     # samples whose value is lower than *or equal to* x!)
     # We save the indices of the last occurence of each element in the vector 'x',
-    # when 'x' is sorted in ascending order. Since the function 'np.unique' returns
-    # the first occurence of each element, we first sort x in descending order
-    # before applying the function 'np.unique'
+    # when 'x' is sorted in ascending order. 
 
-    # x = sorted(x, reverse=True)
-    x = np.flip(np.sort(x), axis=0)
-    x, iu = np.unique(x, return_index=True)
-    iu = N-1 - iu # Correct the indices so that they refer to the vector x sorted
-    # in ascending order
+    x = np.sort(x) # sort x in ascending order
+    x_u = np.unique(x) # get unique values of x
+    iu = np.array([np.where(x_u[ii]==x)[0][-1] for ii in range(len(x_u))])
+    #extract indices of the last occurence of each unique value in x
 
     F = F[iu]
     N = len(F)
@@ -110,9 +108,9 @@ def empiricalcdf(x, xi):
     Fi = np.ones((len(xi),))
 
     for j in range(N-1, -1, -1):
-        Fi[xi[:] <= x[j]] = F[j]
+        Fi[xi[:] <= x_u[j]] = F[j]
 
-    Fi[xi < x[0]] = 0
+    Fi[xi < x_u[0]] = 0
 
     return Fi
 
@@ -371,7 +369,7 @@ def split_sample(Z, n=10):
       idx = respective groups of the samples         - numpy.ndarray(N, )
             You can easily derive the n groups
             {Zi} as:
-                Zi = Z[idx == i]  for i = 1, ..., n
+                Zi = Z[idx == i]  for i = 0, ..., n-1
        Zk = groups' edges (range of Z in each group) - numpy.ndarray(n_eff+1, )
        Zc = groups' centers (mean value of Z in each - numpy.ndarray(n_eff, )
             group)
@@ -424,10 +422,10 @@ def split_sample(Z, n=10):
     ###########################################################################
     n_eff = n
 
-    Zu = np.unique(Z) # district values of Z
+    Zu = np.unique(Z) # distrint values of Z
 
-    if len(Zu) < n: # if number of distinct values less than the specified
-                    # number of groups
+    if len(Zu) <= n: # if number of distinct values less than or equal to the 
+                    # specified number of groups
 
         n_eff = len(Zu)
         Zc = np.sort(Zu) # groups' centers are the different values of Xi
@@ -442,19 +440,37 @@ def split_sample(Z, n=10):
         split[-1] = N-1
         # Determine the edges of Z in each group:
         Zk = Z_sort[split]
-
+        
         # Check that values that appear several times in Z belong to the same group:
-        idx_keep = np.full((n_eff+1, ), True, dtype=bool)
+        # To do this, we check that no values are repeated in Zk
+        idx_keep = np.full((n_eff+1, ), True, dtype=bool) # index of value of Zk 
+        # to be kept (True) or to be dropped (False)       
         for k in range(len(Zk)):
-            if np.sum(Zk[k+1:n_eff+1] == Zk[k]) > 1:
-                if k < len(Zk)-1:
-                    idx_keep[k] = False
+            if idx_keep[k]: # if the value was not already discarded
+                if np.sum(Zk[idx_keep] == Zk[k]) > 2: 
+                    # the value Zk[k] appear more than twice, in this case, we 
+                    # remove one value from Zk (the k-th value)  
+                    idx_keep[k] = False                
+                elif np.sum(Zk[idx_keep] == Zk[k]) == 2:
+                    # the value Zk[k] appear exactly twice, in this case:
+                    if k < len(Zk)-3:
+                        # if the last and one before last values are the same, we
+                        # we do not change anything (this case will be specifically
+                        # treated when determining the respective groups of the 
+                        # sample)
+                        # Otherwise, we change the subsequent value of the edge 
+                        # Zk[k+1] so that it is equal to the value in the sample
+                        # immediately higher than Zk[k] and remove the next edge 
+                        # (Zk[k+2]) to avoid having groups with very small sizes:
+                        idx_keep[k+2] = False 
+                        Zk[k+1] = Z_sort[np.where(Z_sort>Zk[k])[0][0]]
+                    elif k == len(Zk)-3:
+                        # do not remove the next edge Zk[k+2] when it is the 
+                        # last edge
+                        Zk[k+1] = Z_sort[np.where(Z_sort>Zk[k])[0][0]]
+                        # When k == len(Zk)-1, nothing needs to be changed
         Zk = Zk[idx_keep]
         n_eff = len(Zk) - 1
-
-        Zc = np.mean(np.column_stack((Zk[np.arange(0, n_eff)],
-                                      Zk[np.arange(1, n_eff+1)])),
-                     axis=1) # centers (average value of each group)
 
     # Determine the respective groups of the sample:
     idx = -1 * np.ones((N, ), dtype='int8')
@@ -463,7 +479,19 @@ def split_sample(Z, n=10):
             idx[[j >= Zk[k] and j < Zk[k+1] for j in Z]] = k
         else:
             idx[[j >= Zk[k] and j <= Zk[k+1] for j in Z]] = k
-
+            
+    # Old version: Zc was calculated as the average value of the edges for each group           
+#        Zc = np.mean(np.column_stack((Zk[np.arange(0, n_eff)],
+#                                      Zk[np.arange(1, n_eff+1)])),
+#                     axis=1) # centers (average value of each group)
+    # New version: Zc is calculated as the average value of each group
+    Zc = np.nan * np.zeros((n_eff, ))
+    for k in range(n_eff):
+        Zc[k] = np.mean(Z[idx==k])
+    # Check that all samples were assigned to a group
+    if np.any(idx==-1):
+        raise RuntimeError('Some samples were not assigned to any group')
+        
     return idx, Zk, Zc, n_eff
 
 

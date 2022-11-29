@@ -1,14 +1,14 @@
 """
 This script provides an application example of how to use several
-visualization tools (scatter plots, coloured scatter plots, parallel
-coordinate plots, Andres' plot) to learn about sensitivity.
+visualization tools (scatter plots, 2D coloured scatter plots, parallel
+coordinate plots) to learn about sensitivity.
 The application example is the Hishigami-Homma function, which is a
 standard benchmark function in the Sensitivity Analysis literature.
 (see help of function 'ishigami_homma.ishigami_homma_function' for more details
 and references).
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)

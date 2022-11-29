@@ -20,6 +20,7 @@ applied to the Leaf catchment in Mississipi, USA
 The inputs subject to SA are the 5 model parameters, and the scalar
 output for SA is (one or multiple) performance metric.
 
+
 INDEX
 
 Steps:
@@ -34,7 +35,7 @@ Steps:
    references on the use of the dummy input).
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -57,8 +58,8 @@ from SAFEpython import HyMod
 
 #%% Step 2: (setup the Hymod model)
 
-# Specify the directory where the data are stored
-mydir = r'Y:\Home\sarrazin\SAFE\SAFEpython_v0.0.0\data'
+# Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
 # Load data:
 data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
 rain = data[0:365, 0] # 1-year simulation
@@ -251,9 +252,9 @@ YC = model_execution(fun_test, XC, rain, evap, flow, warmup) # shape (N*M, )
 
 # Select the j-th model output and compute sensitivity indices:
 Nboot = 1000
-j = 0
+j = 0 # RMSE
 Si1, STi1 = VB.vbsa_indices(YA[:, j], YB[:, j], YC[:, j], M, Nboot)
-j = 1
+j = 1 # BIAS
 Si2, STi2 = VB.vbsa_indices(YA[:, j], YB[:, j], YC[:, j], M, Nboot)
 
 # Compute mean and confidence intervals of the sensitivity indices across the
@@ -286,6 +287,25 @@ pf.stackedbar(np.stack((STi1_m, STi2_m)), labelinput=X_Labels,
               Y_Label='total effects', horiz_tick_label=['RMSE', 'BIAS'])
 plt.show()
 
+# We note that the bootstrap confidence intervals for the sensitivity indices 
+# obtained for RMSE are very large and there tend to be negative values, which
+# means that the sample size used is not large enough. This convergence issue
+# may be explained by the fact that the distribution of RMSE is not normal.
+# Plot distribution for RMSE
+plt.figure()
+pf.plot_cdf(YA[:, 0], Y_Label='RMSE')
+plt.show()
+plt.figure()
+fi, yi = pf.plot_pdf(YA[:, 0], Y_Label='RMSE')
+plt.show()
+# Plot distribution for BIAS
+plt.figure()
+pf.plot_cdf(YA[:, 1], Y_Label='BIAS')
+plt.show()
+plt.figure()
+fi, yi = pf.plot_pdf(YA[:, 1], Y_Label='BIAS')
+plt.show()
+
 #%% Step 6 (Identification of influential and non-influential inputs adding an
 # articial 'dummy' input to the list of the model inputs. The sensitivity
 # indices for the dummy parameter estimate the approximation error of the
@@ -297,7 +317,8 @@ X_Labels_dummy = ['Sm', 'beta', 'alfa', 'Rs', 'Rf', 'dummy']
 
 # Compute main (first-order) and total effects using bootstrapping for the model
 # inputs and the dummy input:
-j = 0
+#j = 0 # RMSE
+j = 1 # BIAS
 Nboot = 1000
 Si, STi, Sdummy, STdummy = VB.vbsa_indices(YA[:, j], YB[:, j], YC[:, j],
                                            M, Nboot=Nboot, dummy=True)

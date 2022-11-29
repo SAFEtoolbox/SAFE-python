@@ -41,7 +41,7 @@ or
 5b. Perform RSA with groups
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -62,7 +62,7 @@ from SAFEpython import HyMod
 #%% Step 2: (setup the Hymod model)
 
 # Specify the directory where the data are stored
-mydir = r'Y:\Home\sarrazin\SAFE\SAFEpython_v0.0.0\data'
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\SAFEpython_v0.0.0\data'
 # Load data:
 data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
 rain = data[0:365, 0] # 1-year simulation

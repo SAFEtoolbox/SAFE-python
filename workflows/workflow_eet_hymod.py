@@ -62,7 +62,7 @@ models: Influence of calibration data variability and length on model
 credibility. Water Resour. Res., 19, 251-259.
 
 This script prepared by  Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -84,8 +84,8 @@ from SAFEpython import HyMod
 
 #%% Step 2: (setup the Hymod model)
 
-# Specify the directory where the data are stored
-mydir = r'Y:\Home\sarrazin\SAFE\SAFEpython_v0.0.0\data'
+# Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
 # Load data:
 data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
 rain = data[0:365, 0] # 2-year simulation

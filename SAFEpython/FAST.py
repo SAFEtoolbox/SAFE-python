@@ -9,9 +9,9 @@
     For any comment and feedback, or to discuss a Licence agreement for
     commercial use, please contact: francesca.pianosi@bristol.ac.uk
     For details on how to cite SAFE in your publication, please see:
-    https://www.safetoolbox.info
+    https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.0.0
+    Package version: SAFEpython_v0.1.0
 
     References:
 
@@ -29,7 +29,6 @@ from __future__ import division, absolute_import, print_function
 from warnings import warn
 import numpy as np
 import scipy.stats as st
-from numba import jit
 
 def FAST_sampling(distr_fun, distr_par, M, N=[], Nharm=4, omega=[]):
 
@@ -414,7 +413,6 @@ def generate_FAST_frequency(M):
 
     return omega
 
-@jit
 def FAST_indices(Y, M, Nharm=4, omega=[]):
 
     """Computes main effect (first-order) sensitivity index according to the

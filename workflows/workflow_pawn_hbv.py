@@ -12,8 +12,18 @@ and the outputs for SA are a set of performance metrics.
 See help of function 'hbv_snow_objfun.m' for more details
 and references about the HBV model and the objective functions.
 
+The HBV model has a parameter that takes discrete values. This workflow 
+demonstrates how discrete inputs are handled to calculate PAWN sensitivity 
+indices.
+
 The case study area is is the Nezinscot River at Turner center, Maine,
 USA (USGS 01055500, see http://waterdata.usgs.gov/nwis/nwismap)
+
+IMPORTANT NOTE FOR PYTHON 2 USERS: 
+To run the code with Python 2, comment L289 and uncomment L290. This
+will make the code compatible with Python 2, but not with numba. To avoid
+error/warnings, also comment "@jit" L33. The execution time will be longer 
+than with Python 3 because the code cannot be compiled by numba.
 
 REFERENCES
 
@@ -25,7 +35,7 @@ for global sensitivity analysis based on cumulative distribution
 functions, Env. Mod. & Soft., 67, 1-11.
 
 This script prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -41,14 +51,14 @@ from SAFEpython import PAWN
 import SAFEpython.plot_functions as pf # module to visualize the results
 from SAFEpython.model_execution import model_execution # module to execute the model
 from SAFEpython.sampling import AAT_sampling # module to perform the input sampling
-from SAFEpython.util import aggregate_boot  # function to aggregate the bootstrap results
+from SAFEpython.util import aggregate_boot # function to aggregate the bootstrap results
 
 from SAFEpython import HBV
 
 #%% Step 2: (setup the HBV model)
 
-# Specify the directory where the data are stored
-mydir = r'Y:\Home\sarrazin\SAFE\SAFEpython_v0.0.0\data'
+# Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
 # Load data:
 data = np.genfromtxt(mydir + r'\01055500.txt', comments='%')
 
@@ -110,13 +120,17 @@ n = 10
 # n = [10]*M
 # n[-1] = 6 # a different number of conditioning intervals is chosen input X13
 # (parameter MAXBAS)
+# Note that the PAWN functions handle discrete inputs/inputs that have values 
+# that are repeated, so that all occurences of a given value belong to the same 
+# conditioning interval
 
 # Choose one among multiple outputs for subsequent analysis:
 Yi = Y[:, 1]
 
 # Check how the sample is split for parameter MAXBAS that takes discrete values:
 YY, xc, NC, n_eff, Xk, XX = PAWN.pawn_split_sample(X, Yi, n)
-print(n_eff) # number of conditioning intervals for input MAXBAS
+print(n_eff) # number of conditioning intervals for each input (for MAXBAS, the
+# number of intervals was changed to match the number of discrete values)
 print(NC[1]) # number of data points in each conditioning interval conditioning
 # intervals for input Ts
 print(NC[-1])# number of data points in each conditioning interval conditioning

@@ -9,9 +9,9 @@
     For any comment and feedback, or to discuss a Licence agreement for
     commercial use, please contact: francesca.pianosi@bristol.ac.uk
     For details on how to cite SAFE in your publication, please see:
-    https://www.safetoolbox.info
+    https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.0.0
+    Package version: SAFEpython_v0.1.0
 
 """
 

@@ -19,7 +19,7 @@ amplitude sensitivity test (FAST), Computational Statistics & Data
 Analysis, 26, 445-460.
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -98,14 +98,6 @@ for param in range(4):
 
     # Plot the results:
     plt.subplot(2, 2, param+1)
-    # next three lines just for the legend:
-    plt.plot(MM[0], SM[0, 0], 'sk', markersize=ms,
-             markerfacecolor=[126/256, 126/256, 126/256])
-    plt.plot(MM[1], SM[0, 1], '^k', markersize=ms, markerfacecolor="None",
-             markeredgewidth=2)
-    plt.plot(MM[2], SM[0, 2], 'ok', markersize=ms, markerfacecolor="None",
-             markeredgewidth=2)
-    # next three for plotting:
     plt.plot(MM, SM[:, 0], 'sk', markersize=ms,
              markerfacecolor=[126/256, 126/256, 126/256])
     plt.plot(MM, SM[:, 1], '^k', markersize=ms, markerfacecolor="None",
@@ -115,7 +107,7 @@ for param in range(4):
     # customize picture:
     plt.xticks(MM, **pltfont)
     plt.xlim((MM[0]-1, MM[-1]+1))
-    plt.ylim((-0.1, 1.1))
+    plt.ylim((min(np.min(SM)*1.2, 0), max(1.1, np.max(SM)*1.2)))
 
     plt.xlabel('Number of inputs M', **pltfont)
     plt.ylabel('1st-order sensitivity', **pltfont)

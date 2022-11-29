@@ -37,7 +37,7 @@ for global sensitivity analysis based on cumulative distribution
 functions, Env. Mod. & Soft., 67, 1-11.
 
 This script prepared by  Fanny Sarrazin, 2019
-fanny.sarrazin@bristol.ac.uk
+fanny.sarrazin@ufz.de
 """
 
 #%% Step 1: (import python modules)
@@ -58,8 +58,8 @@ from SAFEpython import HyMod
 
 #%% Step 2: (setup the Hymod model)
 
-# Specify the directory where the data are stored
-mydir = r'Y:\Home\sarrazin\SAFE\SAFEpython_v0.0.0\data'
+# Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
 # Load data:
 data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
 rain = data[0:365, 0] # 1-year simulation
@@ -291,8 +291,12 @@ plt.show()
 # instance only output values above a given threshold:
 thres = [30]
 Nboot = 1000
+# print to screen the size of the sample that will be used to calculate the
+# PAWN indices:
+print(np.sum(Y>thres))
 KS_median_cond, KS_mean_cond, KS_max_cond = \
 PAWN.pawn_indices(X, Y, n, Nboot=Nboot, output_condition=PAWN.above, par=thres)
+# other implemented output conditions: PAWN.allrange (default) and PAWN.below
 
 # Compute mean and confidence intervals of the sensitivity indices across the
 # bootstrap resamples:
@@ -310,5 +314,5 @@ pf.boxplot1(KS_mean_cond_m, S_lb=KS_mean_cond_lb, S_ub=KS_mean_cond_ub,
             X_Labels=X_Labels, Y_Label='KS (mean)')
 plt.subplot(133)
 pf.boxplot1(KS_max_cond_m, S_lb=KS_max_cond_lb, S_ub=KS_max_cond_ub,
-            X_Labels=X_Labels, Y_Label='Ks (max)')
+            X_Labels=X_Labels, Y_Label='KS (max)')
 plt.show()

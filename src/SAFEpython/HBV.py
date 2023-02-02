@@ -11,7 +11,7 @@
     For details on how to cite SAFE in your publication, please see:
     https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.1.0
+    Package version: SAFEpython_v0.1.1
     
     Note: to run the code with Python 2, comment L289 and uncomment L290. This
     will make the code compatible with Python 2, but not with numba. To avoid

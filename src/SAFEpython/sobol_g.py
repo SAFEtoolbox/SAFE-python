@@ -1,5 +1,5 @@
 """
-    Module to compute the Ishigami-Homma function
+    Module to compute the Sobol' g-function
 
     This module is part of the SAFE Toolbox by F. Pianosi, F. Sarrazin and
     T. Wagener at Bristol University (2015).
@@ -11,7 +11,7 @@
     For details on how to cite SAFE in your publication, please see:
     https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.1.0
+    Package version: SAFEpython_v0.1.1
 
     References:
 
@@ -24,22 +24,23 @@ import numpy as np
 from numba import jit
 
 @jit
-def ishigami_homma_function(x):
-    """Implements the Ishigami-Homma function, a standard benchmark function in
-    the Sensitivity Analysis literature (see for instance Eq. (4.34) in
+def sobol_g_function(x, a):
+
+    """Implements the Sobol' g-function, a standard benchmark function in
+    the Sensitivity Analysis literature (see for instance Sec. 3.6 in
     Saltelli et al. (2008)).
 
     Usage:
-    y, V, Si_ex, STi_ex= ishigami_homma_function(x)
+    y, V, Si_ex = sobol_g_function(x, a)
 
     Input:
-         x = vector of inputs x[0],x[1],x[2]               - numpy.ndarray(3, )
-        x(i) ~ Unif(-pi,+pi) for all i
+         x = function inputs [x(i)~Unif(0,1) for all i]    - numpy.ndarray(M, )
+         a = function parameters (fixed)                   - numpy.ndarray(M, )
+
     Output:
-         y = output                                        - numpy.ndarray(1,)
-         V = output variance (*)                           - numpy.ndarray(1,)
+         y = output                                        - numpy.ndarray(1, )
+         V = output variance (*)                           - numpy.ndarray(1, )
      Si_ex = first-order sensitivity indices (*)           - numpy.ndarray(3, )
-    STi_ex = total-order sensitivity indices (*)           - numpy.ndarray(3, )
 
     (*) = exact value computed analytically
 
@@ -57,30 +58,17 @@ def ishigami_homma_function(x):
     For details on how to cite SAFE in your publication, please see:
     https://www.safetoolbox.info"""
 
-    a=2
-    b=1
-    y = np.array(np.sin(x[0]) + a*(np.sin(x[1]))**2 + b*(x[2])**4*np.sin(x[0]))
+    #if len(a) != len(x):
+    #    raise ValueError('x and a must have the same number of elements')
+    #g = (abs(4*x-2)+a) / (1+a)
+    g = (np.absolute(4*x-2)+a) / (1+a)
+    y = np.array(np.prod(g))
 
-    # By model definition, we should get:
-    # VARy = VAR(Y) = 1/2 + a^2/8 + b*pi^4/5 + b^2*pi^8/18
-    # V1 = VAR(E(Y|X1)) = 1/2 + b*pi^4/5 + b^2*pi^8/50
-    # V2 = VAR(E(Y|X2)) = a^2/8
-    # V3 = VAR(E(Y|X3)) = 0
-    # V13 = VAR(E(Y|X1,X3)) = b^2*pi^4/18 - b^2*pi^8/50
-    # V12 = V23 = V123 = 0
-    # and thus:
-    # ST1 = S1 + S13
-    # ST2 = S2
-    # ST3 = S13
+    # By model definition:
+    # Vi = VAR(E(Y|Xi)) = 1 / ( 3(1+ai)**2 )
+    # VARy = V = - 1 + np.prod( 1 + Vi )
+    Vi = 1/(3*(1+a)**2)
+    V = np.array(-1 + np.prod(1+Vi))
+    Si_ex = Vi/V
 
-    Si_ex = np.nan * np.ones((3,))
-    STi_ex = np.nan * np.ones((3,))
-    V  = np.array(1/2 + a**2/8 + b*np.pi**4/5 + b**2*np.pi**8/18)
-    Si_ex[0] = (1/2 + b*np.pi**4/5 + b**2*np.pi**8/50)/V
-    Si_ex[1] = a**2/8 / V
-    Si_ex[2] = 0
-    STi_ex[0] = Si_ex[0] + (b**2*np.pi**8/18 - b**2*np.pi**8/50)/V
-    STi_ex[1] = Si_ex[1]
-    STi_ex[2] = (b**2*np.pi**8/18 - b**2*np.pi**8/50)/V
-
-    return y, V, Si_ex, STi_ex
+    return y, V, Si_ex

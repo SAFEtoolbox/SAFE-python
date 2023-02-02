@@ -11,7 +11,7 @@
     For details on how to cite SAFE in your publication, please see:
     https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.1.0
+    Package version: SAFEpython_v0.1.1
 """
 from __future__ import division, absolute_import, print_function
 

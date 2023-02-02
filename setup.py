@@ -21,7 +21,7 @@ setup(
     author='Francesca Pianosi, Fanny Sarrazin, Thorsten Wagener',  # Optional
     author_email='fanny.sarrazin@ufz.de',  # Optional
     license='see LICENSE.md', # Optional
-    packages=find_packages(exclude=['workflows', 'data']),  # Required
+    packages=find_packages(exclude=['examples']),  # Required
 #    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4',
     install_requires=[
         "numpy>=1.13.0",

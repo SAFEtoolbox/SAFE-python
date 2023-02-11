@@ -3,7 +3,9 @@ Python version of the Sensitivity Analysis for Everybody (SAFE) Toolbox.
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL3.0-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-<left> <img src="https://raw.githubusercontent.com/SAFEtoolbox/SAFEtoolbox.github.io/main/drawing2.png" width = "300px"><left>
+<p align="center">
+<img src="https://raw.githubusercontent.com/SAFEtoolbox/SAFEtoolbox.github.io/main/drawing2.png" width = "300px">
+</p>
 
 ### BEFORE STARTING
 

@@ -19,12 +19,6 @@ indices.
 The case study area is is the Nezinscot River at Turner center, Maine,
 USA (USGS 01055500, see http://waterdata.usgs.gov/nwis/nwismap)
 
-IMPORTANT NOTE FOR PYTHON 2 USERS: 
-To run the code with Python 2, comment L289 and uncomment L290. This
-will make the code compatible with Python 2, but not with numba. To avoid
-error/warnings, also comment "@jit" L33. The execution time will be longer 
-than with Python 3 because the code cannot be compiled by numba.
-
 REFERENCES
 
 Pianosi, F. and Wagener, T. (2018), Distribution-based sensitivity
@@ -58,7 +52,7 @@ from SAFEpython import HBV
 #%% Step 2: (setup the HBV model)
 
 # Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
-mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\SAFE-python-0.1.1\examples\data'
 # Load data:
 data = np.genfromtxt(mydir + r'\01055500.txt', comments='%')
 

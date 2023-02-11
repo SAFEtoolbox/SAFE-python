@@ -67,7 +67,7 @@ X = AAT_sampling(samp_strat, M, distr_fun, distr_par, N)
 input_file = '\Input_samples.txt'
 
 # Specify the directory where the input file will be saved:
-my_dir = r'C:\Users\sarrazin\Documents\SAFEpython_v0.0.0-alpha'
+my_dir = r'Y:\Home\sarrazin\SAFE\SAFE_Python'
 
 # Choose the format type (same format for all inputs):
 formattype = '%3.3f'
@@ -78,11 +78,11 @@ formattype = '%3.3f'
 # formattype = '%g'
 
 # Save to text file:
-np.savetxt(my_dir+input_file, X, fmt=formattype)
+np.savetxt(my_dir + input_file, X, fmt=formattype)
 
 # You can also add a header to the file
 header = 'This file was created by XXX'
-np.savetxt(my_dir+input_file, X, fmt=formattype, header=header)
+np.savetxt(my_dir + input_file, X, fmt=formattype, header=header)
 
 #%% Step 3
 
@@ -91,13 +91,13 @@ np.savetxt(my_dir+input_file, X, fmt=formattype, header=header)
 #%% Step 4 (Perform Sensitivity Analysis)
 
 # Specify the directory where the output file will be saved:
-my_dir = r'C:\Users\sarrazin\Documents\SAFEpython_v0.0.0-alpha'
+my_dir = r'Y:\Home\sarrazin\SAFE\SAFE_Python'
 
 # Output file name:
 output_file = '\Output_samples.txt'
 
 # Load data from file:
-Y = np.genfromtxt(my_dir+output_file, comments='#')
+Y = np.genfromtxt(my_dir + output_file, comments='#')
 
 # From now on, just use all the functions in RSA, EET, VBSA, etc.
 

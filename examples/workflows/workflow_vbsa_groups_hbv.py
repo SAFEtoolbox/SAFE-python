@@ -14,12 +14,6 @@ we here group them into 3 groups:
 See also 'workflow_vbsa_hymod.py' about VBSA
 and 'workflow_eet_hbv.py' about HBV model and study area.
 
-IMPORTANT NOTE FOR PYTHON 2 USERS: 
-To run the code with Python 2, comment L289 and uncomment L290. This
-will make the code compatible with Python 2, but not with numba. To avoid
-error/warnings, also comment "@jit" L33. The execution time will be longer 
-than with Python 3 because the code cannot be compiled by numba.
-
 This script was prepared by Fanny Sarrazin, 2019
 fanny.sarrazin@ufz.de
 """
@@ -50,7 +44,7 @@ Case = 1
 warmup = 30 # (days)
 
 # Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
-mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\SAFE-python-0.1.1\examples\data'
 # Load data:
 data = np.genfromtxt(mydir + r'\01055500.txt', comments='%')
 

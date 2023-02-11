@@ -85,7 +85,7 @@ from SAFEpython import HyMod
 #%% Step 2: (setup the Hymod model)
 
 # Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
-mydir = r'Y:\Home\sarrazin\SAFE\SAFE_python\SAFEpython_v0.1.0\data'
+mydir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\SAFE-python-0.1.1\examples\data'
 # Load data:
 data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
 rain = data[0:365, 0] # 2-year simulation

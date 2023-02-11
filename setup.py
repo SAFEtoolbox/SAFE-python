@@ -13,20 +13,20 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='SAFEpython',  # Required
-    version='0.1.0',  # Required
+    version='0.1.1',  # Required
     description='A Python implementation of the SAFE toolbox for sensitivity analysis',  # Optional
     long_description=long_description,  # Optional
     long_description_content_type='text/markdown',  # Optional (see note above)
-    url='https://github.com/SAFEtoolbox',  # Optional
+    url='https://safetoolbox.github.io',  # Optional
     author='Francesca Pianosi, Fanny Sarrazin, Thorsten Wagener',  # Optional
     author_email='fanny.sarrazin@ufz.de',  # Optional
-    license='see LICENSE.md', # Optional
+    license='GPL-3.0', # Optional
     packages=find_packages(exclude=['examples']),  # Required
-#    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4',
+#    python_requires='>=3.7, <4',
     install_requires=[
-        "numpy>=1.13.0",
-        "scipy>=0.19.1",
-        "numba",
-        "matplotlib",
+        "numpy>=1.19.2",
+        "scipy>=1.3.0",
+        "numba>=0.49.0",
+        "matplotlib>=2.2.3",
     ],
 )

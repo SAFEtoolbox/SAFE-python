@@ -12,7 +12,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='SAFEpython',  # Required
+    name='safepython',  # Required
     version='0.1.1',  # Required
     description='A Python implementation of the SAFE toolbox for sensitivity analysis',  # Optional
     long_description=long_description,  # Optional

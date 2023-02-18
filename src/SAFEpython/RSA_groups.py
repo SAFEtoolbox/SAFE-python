@@ -27,7 +27,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-from SAFEpython.util import empiricalcdf, split_sample
+from safepython.util import empiricalcdf, split_sample
 
 def RSA_indices_groups(X, Y, ngroup=10, Nboot=0):
 

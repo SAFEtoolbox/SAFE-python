@@ -50,14 +50,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as st
 
-import SAFEpython.RSA_thres as Rt # module to perform RSA with threshold
-import SAFEpython.RSA_groups as Rg # module to perform RSA with groups
-import SAFEpython.plot_functions as pf # module to visualize the results
-from SAFEpython.model_execution import model_execution # module to execute the model
-from SAFEpython.sampling import AAT_sampling # module to perform the input sampling
-from SAFEpython.util import aggregate_boot  # function to aggregate the bootstrap results
+import safepython.RSA_thres as Rt # module to perform RSA with threshold
+import safepython.RSA_groups as Rg # module to perform RSA with groups
+import safepython.plot_functions as pf # module to visualize the results
+from safepython.model_execution import model_execution # module to execute the model
+from safepython.sampling import AAT_sampling # module to perform the input sampling
+from safepython.util import aggregate_boot  # function to aggregate the bootstrap results
 
-from SAFEpython import HyMod
+from safepython import HyMod
 
 #%% Step 2: (setup the Hymod model)
 

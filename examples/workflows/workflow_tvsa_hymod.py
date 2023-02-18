@@ -38,13 +38,13 @@ import matplotlib.pyplot as plt
 import scipy.stats as st
 
 # Import SAFE modules
-import SAFEpython.VBSA as VB # module to perform VBSA
-from SAFEpython import FAST # module to perform FAST
-from SAFEpython import EET # module to perform EET
-from SAFEpython.model_execution import model_execution # module to execute the model
-from SAFEpython.sampling import AAT_sampling, OAT_sampling # functions to perform the input sampling
+import safepython.VBSA as VB # module to perform VBSA
+from safepython import FAST # module to perform FAST
+from safepython import EET # module to perform EET
+from safepython.model_execution import model_execution # module to execute the model
+from safepython.sampling import AAT_sampling, OAT_sampling # functions to perform the input sampling
 
-from SAFEpython import HyMod
+from safepython import HyMod
 
 #%% Step 2: (Setup the Hymod model and define input variability space)
 

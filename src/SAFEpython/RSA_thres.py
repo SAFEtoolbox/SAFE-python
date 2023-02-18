@@ -30,8 +30,8 @@ import numpy as np
 from numpy.matlib import repmat
 import matplotlib.pyplot as plt
 
-from SAFEpython.util import empiricalcdf
-from SAFEpython.lhcube import lhcube_shrink
+from safepython.util import empiricalcdf
+from safepython.lhcube import lhcube_shrink
 
 
 def RSA_indices_thres(X, Y, threshold, Nboot=0):

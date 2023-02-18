@@ -19,11 +19,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as st
 
-from SAFEpython.model_execution import model_execution
-import SAFEpython.plot_functions as pf # module to visualize the results
-from SAFEpython.sampling import AAT_sampling
+from safepython.model_execution import model_execution
+import safepython.plot_functions as pf # module to visualize the results
+from safepython.sampling import AAT_sampling
 
-from SAFEpython.ishigami_homma import ishigami_homma_function
+from safepython.ishigami_homma import ishigami_homma_function
 
 #%% Step 2 (setup the model)
 

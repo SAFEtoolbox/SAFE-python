@@ -29,7 +29,7 @@ import numpy as np
 from numba import jit # the function jit allows to compile the code and reduced
 # the running time
 
-from SAFEpython.util import RMSE, NSE
+from safepython.util import RMSE, NSE
 
 @jit
 def snow_routine(param, temp, prec):

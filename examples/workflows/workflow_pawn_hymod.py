@@ -48,13 +48,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as st
 
-from SAFEpython import PAWN
-import SAFEpython.plot_functions as pf # module to visualize the results
-from SAFEpython.model_execution import model_execution # module to execute the model
-from SAFEpython.sampling import AAT_sampling, AAT_sampling_extend # module to perform the input sampling
-from SAFEpython.util import aggregate_boot  # function to aggregate the bootstrap results
+from safepython import PAWN
+import safepython.plot_functions as pf # module to visualize the results
+from safepython.model_execution import model_execution # module to execute the model
+from safepython.sampling import AAT_sampling, AAT_sampling_extend # module to perform the input sampling
+from safepython.util import aggregate_boot  # function to aggregate the bootstrap results
 
-from SAFEpython import HyMod
+from safepython import HyMod
 
 #%% Step 2: (setup the Hymod model)
 

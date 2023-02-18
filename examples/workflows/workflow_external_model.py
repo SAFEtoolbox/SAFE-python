@@ -25,7 +25,7 @@ from __future__ import division, absolute_import, print_function
 import numpy as np
 import scipy.stats as st
 
-from SAFEpython.sampling import AAT_sampling, OAT_sampling # module to perform
+from safepython.sampling import AAT_sampling, OAT_sampling # module to perform
 # the input sampling
 
 # %% Step 2 (Create input sample)

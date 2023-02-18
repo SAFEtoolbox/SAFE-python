@@ -68,8 +68,8 @@ def model_execution(fun_test, X, *args, ExtraArgOut=False):
     Example:
 
     import numpy as np
-    from SAFEpython.model_execution import model_execution
-    from SAFEpython.sobol_g import sobol_g_function
+    from safepython.model_execution import model_execution
+    from safepython.sobol_g import sobol_g_function
 
     fun_test = sobol_g_function
     X =  np.random.random((3, 4))

@@ -19,7 +19,7 @@ We recommend reading this (short) paper before getting started. Other reading ma
 
 #### Option 1: Installing the package using pip
 
-``pip install SAFEpython``
+``pip install safepython``
 
 #### Option 2: Installing a local version of the package (if you want to customize the code)
 
@@ -33,13 +33,13 @@ Download the SAFEpython source code to your computer. You go into the SAFE-Pytho
 
 - From command line, you should use:
 
-option 1: ``python -m pip install SAFEpython``
+option 1: ``python -m pip install safepython``
 	
 option 2: ``python -m pip install .``
 
 - For windows users: python cannot be called directly from Windows command line. You have to go into the folder in which python is installed and then execute:
 
-option 1: ``python -m pip install SAFEpython``
+option 1: ``python -m pip install safepython``
 	
 option 2: ``python -m pip install mydir\SAFE-python``
 
@@ -77,9 +77,9 @@ If the user still has no clear idea of what method(s) to start with, we suggest 
 
 ### Note 
 
-Please make sure that you download the version of the 'examples' folder that corresponds to the version of SAFEypthon package you are using. To use the latest version of SAFEpython, you can update the package using: 
+Please make sure that you download the version of the 'examples' folder that corresponds to the version of SAFEpython package you are using. To use the latest version of SAFEpython, you can update the package using: 
 
-``pip install --upgrade SAFEpython``
+``pip install --upgrade safepython``
 
 ### HOW TO CITE SAFEPYTHON
 

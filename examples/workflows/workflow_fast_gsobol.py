@@ -31,12 +31,12 @@ import matplotlib.pyplot as plt
 import scipy.stats as st
 
 # Import SAFE modules
-from SAFEpython import FAST # module to perform FAST
-import SAFEpython.VBSA as VB # module to perform VBSA
-from SAFEpython.model_execution import model_execution # module to execute the model
-from SAFEpython.sampling import AAT_sampling # functions to perform the input sampling
+from safepython import FAST # module to perform FAST
+import safepython.VBSA as VB # module to perform VBSA
+from safepython.model_execution import model_execution # module to execute the model
+from safepython.sampling import AAT_sampling # functions to perform the input sampling
 
-from SAFEpython.sobol_g import sobol_g_function
+from safepython.sobol_g import sobol_g_function
 
 #%% Step 2 (setup the model)
 

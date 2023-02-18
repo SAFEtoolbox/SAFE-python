@@ -29,7 +29,7 @@ from numba import jit # the function jit allows to compile the code and reduced
 # the running time
 
 
-from SAFEpython.util import NSE, RMSE
+from safepython.util import NSE, RMSE
 
 @jit
 def hymod_sim(param, rain, ept):

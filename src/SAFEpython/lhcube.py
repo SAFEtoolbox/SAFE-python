@@ -46,7 +46,7 @@ def lhcube(N, M, nrep=5):
 
     import numpy as np
     import matplotlib.pyplot as plt
-    from SAFEpython.lhcube import lhcube
+    from safepython.lhcube import lhcube
     N = 10
     M = 2
     X, _ = lhcube(N, M)
@@ -142,7 +142,7 @@ def lhcube_shrink(X, N_new, nrep=10):
 
     import numpy as np
     import matplotlib.pyplot as plt
-    from SAFEpython.lhcube import lhcube, lhcube_shrink
+    from safepython.lhcube import lhcube, lhcube_shrink
     N = 30
     M =  2
     X, _ = lhcube(N, M) # create LHS
@@ -239,7 +239,7 @@ def lhcube_extend(X, N_new, nrep=10):
 
     import numpy as np
     import matplotlib.pyplot as plt
-    from SAFEpython.lhcube import lhcube, lhcube_extend
+    from safepython.lhcube import lhcube, lhcube_extend
 
     N = 30
     M =  2

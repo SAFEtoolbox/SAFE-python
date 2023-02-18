@@ -23,7 +23,7 @@ import numpy as np
 from numpy.matlib import repmat
 import scipy.stats as st
 
-from SAFEpython.lhcube import lhcube, lhcube_extend
+from safepython.lhcube import lhcube, lhcube_extend
 
 def AAT_sampling(samp_strat, M, distr_fun, distr_par, N, nrep=5):
 
@@ -91,7 +91,7 @@ def AAT_sampling(samp_strat, M, distr_fun, distr_par, N, nrep=5):
     import scipy.stats as st
     import matplotlib.pyplot as plt
 
-    from SAFEpython.sampling import AAT_sampling
+    from safepython.sampling import AAT_sampling
 
     # Example 1: 2 inputs, both from Unif[0,3]
     N = 1000
@@ -435,7 +435,7 @@ def OAT_sampling(r, M, distr_fun, distr_par, samp_strat, des_type, nrep=5):
 
     import scipy.stats as st
     import matplotlib.pyplot as plt
-    from SAFEpython.sampling import OAT_sampling
+    from safepython.sampling import OAT_sampling
 
     # Example 1: 2 inputs, both from Unif[0,3]
     r = 10
@@ -662,7 +662,7 @@ def Morris_orientation_matrix(k, p):
 
     import numpy as np
     import matplotlib.pyplot as plt
-    from SAFEpython.sampling import Morris_orientation_matrix
+    from safepython.sampling import Morris_orientation_matrix
 
     p = 4
     k = 2

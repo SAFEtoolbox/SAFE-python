@@ -26,12 +26,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as st
 
-import SAFEpython.VBSA as VB # module to perform VBSA
-import SAFEpython.plot_functions as pf # module to visualize the results
-from SAFEpython.model_execution import model_execution # module to execute the model
-from SAFEpython.sampling import AAT_sampling  # module to perform the input sampling
+import safepython.VBSA as VB # module to perform VBSA
+import safepython.plot_functions as pf # module to visualize the results
+from safepython.model_execution import model_execution # module to execute the model
+from safepython.sampling import AAT_sampling  # module to perform the input sampling
 
-from SAFEpython import HBV
+from safepython import HBV
 
 #%% Step 2 (setup the HBV model and define model output)
 

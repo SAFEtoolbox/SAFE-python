@@ -1,4 +1,4 @@
-name: NotebookExamples
+name: notebooks
 channels:
   - anaconda
   - conda-forge

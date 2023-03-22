@@ -12,4 +12,4 @@ dependencies:
   - numba = 0.55.1
   - pip
   - pip:
-    - safepython = 0.1.1
+    - safepython == 0.1.1

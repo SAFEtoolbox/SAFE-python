@@ -83,10 +83,10 @@ Please make sure that you download the version of the 'examples' folder that cor
 
 ### REQUIREMENTS
 
-numpy >= 1.19.2
-scipy >= 1.3.0
-numba >= 0.49.0
-matplotlib >= 2.2.3
+- numpy >= 1.19.2
+- scipy >= 1.3.0
+- numba >= 0.49.0
+- matplotlib >= 2.2.3
 
 ### HOW TO CITE SAFEPYTHON
 

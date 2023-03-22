@@ -75,11 +75,18 @@ Furthermore, SAFE includes additional workflow scripts:
 
 If the user still has no clear idea of what method(s) to start with, we suggest one of the three most widely used methods: eet (e.g. workflow_eet_hymod), rsa (workflow_rsa_hymod), vbsa (workflow_vbsa_hymod) or the visualization workflow (workflow_visual_ishigami_homma.m).
 
-### Note 
+### Note
 
 Please make sure that you download the version of the 'examples' folder that corresponds to the version of SAFEpython package you are using. To use the latest version of SAFEpython, you can update the package using: 
 
 ``pip install --upgrade safepython``
+
+### REQUIREMENTS
+
+numpy >= 1.19.2
+scipy >= 1.3.0
+numba >= 0.49.0
+matplotlib >= 2.2.3
 
 ### HOW TO CITE SAFEPYTHON
 

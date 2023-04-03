@@ -327,7 +327,7 @@ def aggregate_boot(S, alfa=0.05):
     for j in range(R): # loop over sample sizes
 
         S_m[j, :] = np.nanmean(S[j], axis=0) # bootstrap mean
-        idx = ~np.isnan(S[j][:, 1])
+        idx = ~np.isnan(S[j][:, 0])
         if np.sum(idx) < Nboot:
             warn('Statistics were computed using ' + '%d' % (np.sum(idx))+
                  ' bootstrap resamples instead of '+'%d' % (Nboot))

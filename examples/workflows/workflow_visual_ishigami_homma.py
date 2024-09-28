@@ -8,7 +8,7 @@ standard benchmark function in the Sensitivity Analysis literature.
 and references).
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)

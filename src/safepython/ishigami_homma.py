@@ -11,19 +11,25 @@
     For details on how to cite SAFE in your publication, please see:
     https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.1.1
+    Package version: SAFEpython_v0.2.0
 
     References:
 
      Saltelli et al. (2008) Global Sensitivity Analysis, The Primer, Wiley.
+     
+    Note on dependencies: 
+        
+      The dependency to numba was removed from this module. It was implemented 
+      in previous versions of the SAFEpython package to speed up the execution 
+      of the function "ishigami_homma_function".
 """
 
 from __future__ import division, absolute_import, print_function
 
 import numpy as np
-from numba import jit
+#from numba import jit
 
-@jit
+#@jit
 def ishigami_homma_function(x):
     """Implements the Ishigami-Homma function, a standard benchmark function in
     the Sensitivity Analysis literature (see for instance Eq. (4.34) in

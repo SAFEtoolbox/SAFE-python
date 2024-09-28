@@ -19,7 +19,7 @@ amplitude sensitivity test (FAST), Computational Statistics & Data
 Analysis, 26, 445-460.
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)

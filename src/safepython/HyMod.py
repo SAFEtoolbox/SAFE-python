@@ -11,7 +11,7 @@
     For details on how to cite SAFE in your publication, please see:
     https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.1.1
+    Package version: SAFEpython_v0.2.0
 
     References:
 
@@ -21,17 +21,22 @@
     Wagener, T., Boyle, D., Lees, M., Wheater, H., Gupta, H., and Sorooshian,
     S. (2001). A framework for development and application of hydrological
     models. Hydrol. Earth Syst. Sci., 5, 13-26.
+    
+    Note on dependencies: 
+      The dependency to numba was removed from this module. It was implemented 
+      in previous versions of the SAFEpython package to speed up the execution 
+      of the function "hymod_sim".
 """
 from __future__ import division, absolute_import, print_function
 
 import numpy as np
-from numba import jit # the function jit allows to compile the code and reduced
+# from numba import jit # the function jit allows to compile the code and reduced
 # the running time
 
 
 from safepython.util import NSE, RMSE
 
-@jit
+#@jit
 def hymod_sim(param, rain, ept):
 
     """This function simulates the Hymod rainfall-runoff model

@@ -26,7 +26,7 @@ by analyzing temporal dynamics of model performance and parameter
 sensitivity. Water Resources Research 47 (7).
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)

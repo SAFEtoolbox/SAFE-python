@@ -8,7 +8,7 @@ computed. Therefore this script mainly aims at analyzing the accuracy
 and convergence of the function 'VBSA.vbsa_indices'.
 
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)

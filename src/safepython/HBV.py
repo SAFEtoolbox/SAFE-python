@@ -11,27 +11,29 @@
     For details on how to cite SAFE in your publication, please see:
     https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.1.1
+    Package version: SAFEpython_v0.2.0
     
-    Note: to run the code with Python 2, comment L289 and uncomment L290. This
-    will make the code compatible with Python 2, but not with numba. To avoid
-    error/warnings, also comment "@jit" L33. The execution time will be longer 
-    than with Python 3 because the code cannot be compiled by numba.
-
     References:
 
      Seibert, J.(1997), Estimation of Parameter Uncertainty in the HBV Model,
      Nordic Hydrology, 28(4/5), 247-262.
+     
+    Note on dependencies: 
+      The dependency to numba was removed from this module. It was implemented 
+      in previous versions of the SAFEpython package to speed up the execution 
+      of the functions "snow_routine", "hbv_sim", and "mytrimf".
+      To run the code with numba>=0.44.0, uncomment L297 and comment L299. The
+      code is then not compatible with python 2.
 """
 from __future__ import division, absolute_import, print_function
 
 import numpy as np
-from numba import jit # the function jit allows to compile the code and reduced
+#from numba import jit # the function jit allows to compile the code and reduced
 # the running time
 
 from safepython.util import RMSE, NSE
 
-@jit
+#@jit
 def snow_routine(param, temp, prec):
 
     """This function simulates a simple, conceptual snow accumulation/melting
@@ -120,7 +122,7 @@ def snow_routine(param, temp, prec):
     return P, STATES, FLUXES
 
 
-@jit
+#@jit
 def hbv_sim(param, P, ept, Case, ini):
 
     """This function simulates the HBV rainfall-runoff model (Seibert, 1997).
@@ -289,8 +291,9 @@ def hbv_sim(param, P, ept, Case, ini):
     Q_sim = np.zeros((T, ))
 
     for t in range(MAXBAS, T+1):
-        Q_sim[t-1] = c @ Q[t-MAXBAS:t] 
-        #Q_sim[t-1] = np.matmul(c, Q[t-MAXBAS:t]) # use this for python 2 and 
+        #Q_sim[t-1] = c @ Q[t-MAXBAS:t] # use this line when compiling the code
+        #with numba>=0.44.0 and when using python 3
+        Q_sim[t-1] = np.matmul(c, Q[t-MAXBAS:t]) # use this for python 2 and 
         # numba<=0.44.0 (np.matmul is not supported by numba>=0.44.0)
 
     STATES = np.column_stack((SM, UZ, LZ))
@@ -298,7 +301,7 @@ def hbv_sim(param, P, ept, Case, ini):
 
     return Q_sim, STATES, FLUXES
 
-@jit
+#@jit
 def mytrimf(x, param):
     # implements triangular-shaped membership function
     f = np.zeros(x.shape)

@@ -14,8 +14,11 @@ we here group them into 3 groups:
 See also 'workflow_vbsa_hymod.py' about VBSA
 and 'workflow_eet_hbv.py' about HBV model and study area.
 
+WARNING
+The execution of the HBV model can take some time.
+
 This script was prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)
@@ -44,18 +47,18 @@ Case = 1
 warmup = 30 # (days)
 
 # Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
-mydir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\SAFE-python-0.1.1\examples\data'
+mydir = r'C:\Users\fasarrazin\Documents\SAFE-python\examples\data\\'
 # Load data:
-data = np.genfromtxt(mydir + r'\01055500.txt', comments='%')
+data = np.genfromtxt(mydir + r'01055500.txt', comments='%')
 
 # Prepare forcing data (extract simulation period):
 date = [[1948, 10, 1], [1950, 9, 30]] #  2-year simulation
 t_start = np.where(np.logical_and(np.logical_and(
     data[:, 0] == date[0][0], data[:, 1] == date[0][1]),
-                                  data[:, 2] == date[0][2]))[0]
+                                  data[:, 2] == date[0][2]))[0][0]
 t_end = np.where(np.logical_and(np.logical_and(
     data[:, 0] == date[1][0], data[:, 1] == date[1][1]),
-                                data[:, 2] == date[1][2]))[0]
+                                data[:, 2] == date[1][2]))[0][0]
 tt = np.arange(t_start, t_end+1, 1)
 prec = data[tt, 3]
 ept = data[tt, 4]

@@ -11,17 +11,22 @@
     For details on how to cite SAFE in your publication, please see:
     https://safetoolbox.github.io
 
-    Package version: SAFEpython_v0.1.1
+    Package version: SAFEpython_v0.2.0
+    
+    Note on dependencies: 
+      The dependency to numba was removed from this module. It was implemented 
+      in previous versions of the SAFEpython package to speed up the execution 
+      of the function "empiricalcdf".
 """
 from __future__ import division, absolute_import, print_function
 
 from warnings import warn
 import numpy as np
 from numpy.matlib import repmat
-from numba import jit # the function jit allows to compile the code and reduced
+#from numba import jit # the function jit allows to compile the code and reduced
 # the running time
 
-@jit
+#@jit
 def empiricalcdf(x, xi):
 
     """ Compute the empirical CDF of the sample 'x' and evaluate it

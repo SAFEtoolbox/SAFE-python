@@ -15,7 +15,7 @@ each input sample and save the corresponding output into a text file.
 to compute sensitivity indices.
 
 This script prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)
@@ -64,10 +64,10 @@ X = AAT_sampling(samp_strat, M, distr_fun, distr_par, N)
 # c) Save to file:
 
 # Specify name for the input file:
-input_file = '\Input_samples.txt'
+input_file = 'Input_samples.txt'
 
 # Specify the directory where the input file will be saved:
-my_dir = r'Y:\Home\sarrazin\SAFE\SAFE_Python'
+my_dir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\\'
 
 # Choose the format type (same format for all inputs):
 formattype = '%3.3f'
@@ -91,10 +91,10 @@ np.savetxt(my_dir + input_file, X, fmt=formattype, header=header)
 #%% Step 4 (Perform Sensitivity Analysis)
 
 # Specify the directory where the output file will be saved:
-my_dir = r'Y:\Home\sarrazin\SAFE\SAFE_Python'
+my_dir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\\'
 
 # Output file name:
-output_file = '\Output_samples.txt'
+output_file = 'Output_samples.txt'
 
 # Load data from file:
 Y = np.genfromtxt(my_dir + output_file, comments='#')

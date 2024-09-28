@@ -16,7 +16,7 @@ resampling approach used in Variance-Based SA
 [see help of 'VBSA.vbsa_indices.m'].
 
 This script prepared by  Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)
@@ -38,9 +38,9 @@ from safepython import HyMod
 #%% Step 2: (setup the Hymod model)
 
 # Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
-mydir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\SAFE-python-0.1.1\examples\data'
+mydir = r'C:\Users\fasarrazin\Documents\SAFE-python\examples\data\\'
 # Load data:
-data = np.genfromtxt(mydir +'\LeafCatch.txt', comments='%')
+data = np.genfromtxt(mydir +'LeafCatch.txt', comments='%')
 rain = data[0:365, 0] # 1-year simulation
 evap = data[0:365, 1]
 flow = data[0:365, 2]

@@ -29,7 +29,7 @@ for global sensitivity analysis based on cumulative distribution
 functions, Env. Mod. & Soft., 67, 1-11.
 
 This script prepared by Fanny Sarrazin, 2019
-fanny.sarrazin@ufz.de
+fanny.sarrazin@inrae.fr
 """
 
 #%% Step 1: (import python modules)
@@ -52,9 +52,9 @@ from safepython import HBV
 #%% Step 2: (setup the HBV model)
 
 # Specify the directory where the data are stored (CHANGE TO YOUR OWN DIRECTORY)
-mydir = r'Y:\Home\sarrazin\SAFE\SAFE_Python\SAFE-python-0.1.1\examples\data'
+mydir = r'C:\Users\fasarrazin\Documents\SAFE-python\examples\data\\'
 # Load data:
-data = np.genfromtxt(mydir + r'\01055500.txt', comments='%')
+data = np.genfromtxt(mydir + r'01055500.txt', comments='%')
 
 Case = 1 # Case=1: interflow is dominant / Case = 2: percolation is dominant
 warmup = 365 # Model warmup period (days)
@@ -63,10 +63,10 @@ warmup = 365 # Model warmup period (days)
 date = [[1948, 10, 1], [1953, 9, 30]] #  5-year simulation
 t_start = np.where(np.logical_and(np.logical_and(
     data[:, 0] == date[0][0], data[:, 1] == date[0][1]),
-                                  data[:, 2] == date[0][2]))[0]
+                                  data[:, 2] == date[0][2]))[0][0]
 t_end = np.where(np.logical_and(np.logical_and(
     data[:, 0] == date[1][0], data[:, 1] == date[1][1]),
-                                data[:, 2] == date[1][2]))[0]
+                                data[:, 2] == date[1][2]))[0][0]
 tt = np.arange(t_start, t_end+1, 1)
 prec = data[tt, 3]
 ept = data[tt, 4]
